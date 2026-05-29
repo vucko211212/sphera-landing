@@ -171,6 +171,9 @@
     transform: scale(1.07);
     animation: heroDrift 28s ease-in-out infinite alternate;
   }
+  @media (max-width: 760px) {
+    .hero-bg { background-position: 35% center; }
+  }
   @keyframes heroDrift {
     from { transform: scale(1.07) translate(0, 0); }
     to   { transform: scale(1.14) translate(-1%, -1.5%); }
@@ -669,7 +672,7 @@
       <div class="o-nama-text">
         <span class="eyebrow reveal">Naša priča</span>
         <h2 class="reveal d1">Tvoje mesto<br />za <em>predah.</em></h2>
-        <p class="reveal d2">Sphera je stvorena za trenutke koji se ne žure. Savršena kafa, kolači rađeni rukom i prostor koji te odmah smiruje — sve pod jednim krovom, usred gužve Delta Planeta.</p>
+        <p class="reveal d2">Sphera je stvorena za trenutke koji se ne žure. Savršena kafa, kolači handmade i prostor koji te odmah smiruje — sve pod jednim krovom, usred gužve Delta Planeta.</p>
         <p class="reveal d2">Dizajn koji osvaja, ukusi koji ostaju. Sphera nije samo pauza od kupovine — to je razlog zašto dolaziš ponovo.</p>
         <a href="#kontakt" class="btn-wood reveal d3">Pronađi nas</a>
       </div>
@@ -688,18 +691,18 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow reveal">Poslastice</span>
-        <h2 class="reveal d1">Rađeno <em>rukom.</em></h2>
+        <h2 class="reveal d1"><em>Hand Made.</em></h2>
       </div>
       <div class="kolaci-grid">
         <article class="kolac-card reveal">
-          <div class="kolac-photo" style="background-image:url('assets/photos/kolaci-cokolada.png')"></div>
+          <div class="kolac-photo" style="background-image:url('assets/photos/kolaci-mousse.png')"></div>
           <div class="kolac-body">
             <h3>Čokoladni <em>mousse</em></h3>
             <p>Tamna čokolada, nežna tekstura, tanak sloj praline krokanta. Svaki zalogaj — iskustvo za sebe.</p>
           </div>
         </article>
         <article class="kolac-card reveal d1">
-          <div class="kolac-photo" style="background-image:url('assets/photos/kolaci-mousse.png')"></div>
+          <div class="kolac-photo" style="background-image:url('assets/photos/kolaci-cokolada.png')"></div>
           <div class="kolac-body">
             <h3>Voćni <em>tart</em></h3>
             <p>Svežina sezone u svakom zalogaju. Kremasti frangipan, sveže voće, hrskava kora.</p>
