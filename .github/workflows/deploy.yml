@@ -11,13 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy to Vercel and alias
+      - name: Deploy to Vercel
+        id: deploy
         run: |
-          DEPLOY_URL=$(npx vercel --prod --yes \
+          OUTPUT=$(npx vercel --prod --yes \
             --token ${{ secrets.VERCEL_TOKEN }} \
-            --scope ${{ secrets.VERCEL_SCOPE }} \
-            2>&1 | grep "https://" | tail -1)
-          echo "Deployed to: $DEPLOY_URL"
-          npx vercel alias $DEPLOY_URL sphera-omega.vercel.app \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --scope ${{ secrets.VERCEL_SCOPE }}
+            --scope ${{ secrets.VERCEL_SCOPE }})
+          echo "$OUTPUT"
+          DEPLOY_URL=$(echo "$OUTPUT" | grep -oP 'https://sphera-landing-[^\s]+' | head -1)
+          echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+
+      - name: Point alias to new deployment
+        run: |
+          curl -s -X POST \
+            "https://api.vercel.com/v2/deployments/${{ steps.deploy.outputs.deploy_url }}/aliases?teamId=${{ secrets.VERCEL_SCOPE }}" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"alias":"sphera-omega.vercel.app"}'
