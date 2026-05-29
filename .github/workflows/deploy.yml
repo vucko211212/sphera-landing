@@ -11,5 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy to Vercel
-        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_SCOPE }}
+      - name: Deploy to Vercel and alias
+        run: |
+          DEPLOY_URL=$(npx vercel --prod --yes \
+            --token ${{ secrets.VERCEL_TOKEN }} \
+            --scope ${{ secrets.VERCEL_SCOPE }} \
+            2>&1 | grep "https://" | tail -1)
+          echo "Deployed to: $DEPLOY_URL"
+          npx vercel alias $DEPLOY_URL sphera-omega.vercel.app \
+            --token ${{ secrets.VERCEL_TOKEN }} \
+            --scope ${{ secrets.VERCEL_SCOPE }}
